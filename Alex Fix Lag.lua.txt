@@ -1,0 +1,118 @@
+game:GetService("StarterGui"):SetCore("SendNotification",{
+Title = "Văn Thành IOS :))",
+Text = "by: @vanthanhisme_", 
+Duration = 3
+})
+local ScreenGui = Instance.new("ScreenGui")
+local TextLabel = Instance.new("TextLabel")
+local ToggleButton = Instance.new("TextButton")
+
+ScreenGui.Name = "FPSDisplay"
+ScreenGui.Parent = game:GetService("CoreGui")
+
+TextLabel.Parent = ScreenGui
+TextLabel.Size = UDim2.new(0, 100, 0, 30)
+TextLabel.Position = UDim2.new(0, 10, 0, 10)
+TextLabel.BackgroundTransparency = 0.5
+TextLabel.BackgroundColor3 = Color3.new(255, 255, 255)
+TextLabel.TextSize = 14
+TextLabel.TextColor3 = Color3.new(1, 1, 1)
+TextLabel.TextStrokeTransparency = 0.5
+TextLabel.Font = Enum.Font.SourceSansBold
+TextLabel.Text = "Loading..."
+
+ToggleButton.Parent = ScreenGui
+ToggleButton.Size = UDim2.new(0, 100, 0, 30)
+ToggleButton.Position = UDim2.new(0, 10, 0, 50)
+ToggleButton.BackgroundColor3 = Color3.new(255, 255, 255)
+ToggleButton.TextColor3 = Color3.new(0, 0, 0)
+ToggleButton.Text = "Văn Thành IOS"
+ToggleButton.Font = Enum.Font.SourceSansBold
+ToggleButton.TextSize = 14
+
+local isLagFixEnabled = false
+
+local lastTime = tick()
+local frameCount = 0
+
+game:GetService("RunService").RenderStepped:Connect(function()
+    frameCount = frameCount + 1
+    local currentTime = tick()
+    if currentTime - lastTime >= 1 then
+        local fps = frameCount / (currentTime - lastTime)
+        TextLabel.Text = string.format("FPS: %.0f", fps)
+        frameCount = 0
+        lastTime = currentTime
+    end
+end)
+
+local ToDisable = {
+Textures = true,
+VisualEffects = true,
+Parts = true,
+Particles = true,
+Sky = true
+}
+
+local ToEnable = {
+FullBright = false
+}
+
+local Stuff = {}
+
+for _, v in next, game:GetDescendants() do
+if ToDisable.Parts then
+if v:IsA("Part") or v:IsA("Union") or v:IsA("BasePart") then
+v.Material = Enum.Material.SmoothPlastic
+table.insert(Stuff, 1, v)
+end
+end
+
+if ToDisable.Particles then
+if v:IsA("ParticleEmitter") or v:IsA("Smoke") or v:IsA("Explosion") or v:IsA("Sparkles") or v:IsA("Fire") then
+v.Enabled = false
+table.insert(Stuff, 1, v)
+end
+end
+
+if ToDisable.VisualEffects then
+if v:IsA("BloomEffect") or v:IsA("BlurEffect") or v:IsA("DepthOfFieldEffect") or v:IsA("SunRaysEffect") then
+v.Enabled = false
+table.insert(Stuff, 1, v)
+end
+end
+
+if ToDisable.Textures then
+if v:IsA("Decal") or v:IsA("Texture") then
+v.Texture = ""
+table.insert(Stuff, 1, v)
+end
+end
+
+if ToDisable.Sky then
+if v:IsA("Sky") then
+v.Parent = nil
+table.insert(Stuff, 1, v)
+end
+end
+end
+
+game:GetService("TestService"):Message("Effects Disabler Script : Successfully disabled "..#Stuff.." assets / effects. Settings :")
+
+for i, v in next, ToDisable do
+print(tostring(i)..": "..tostring(v))
+end
+
+if ToEnable.FullBright then
+local Lighting = game:GetService("Lighting")
+
+Lighting.FogColor = Color3.fromRGB(255, 255, 255)
+Lighting.FogEnd = math.huge
+Lighting.FogStart = math.huge
+Lighting.Ambient = Color3.fromRGB(255, 255, 255)
+Lighting.Brightness = 5
+Lighting.ColorShift_Bottom = Color3.fromRGB(255, 255, 255)
+Lighting.ColorShift_Top = Color3.fromRGB(255, 255, 255)
+Lighting.OutdoorAmbient = Color3.fromRGB(255, 255, 255)
+Lighting.Outlines = true
+end
