@@ -1,0 +1,86 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/ionlyusegithubformcmods/1-Line-Scripts/main/Mobile%20Friendly%20Orion')))()
+local Player = game.Players.LocalPlayer
+  local Window = OrionLib:MakeWindow({
+		Name = "MENU FIX LAG Văn Thành IOS",
+		HidePremium = false,
+		SaveConfig = true,
+		ConfigFolder = "OrionTest",
+        IntroText = "Văn Thành IOS"       
+})
+
+function MakeScriptHub()
+         loadstring(game:HttpGet("https://raw.githubusercontent.com/VanThanhIOS/FixLagAlexSibikidi/refs/heads/main/alexmain.lua"))()
+end
+
+OrionLib:MakeNotification({
+	Name = "YTB: @thanhdzso1",
+	Content = "TikTok: @vanthanhisme_"..Player.Name..".",
+	Image = "rbxassetid://72361485477575",
+	Time = 5
+})
+
+getgenv().Key = "FreeKey_ALEXFIGLAG_ONKEY100YEAR"
+getgenv().KeyInput = "string"
+
+local Tab = Window:MakeTab({
+	Name = "MENU",
+	Icon = "rbxassetid://72361485477575",
+	PremiumOnly = false
+})
+
+Tab:AddTextbox({
+	Name = "Nhập Key!",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+		getgenv().KeyInput = Value
+	end	  
+})
+
+Tab:AddButton({
+    Name = "Ấn Vào Đây Để Check Key !",
+    Callback = function()
+        if getgenv().KeyInput == getgenv().Key then
+            OrionLib:MakeNotification({
+                Name = "Đang Checking Key",
+                Content = "",
+                Image = "rbxassetid://72361485477575",
+                Time = 5
+            })
+            wait(2)
+            OrionLib:MakeNotification({
+                Name = "Mật Khẩu Đúng ✅",
+                Content = "Nhớ Like And Sub Nhé",
+                Image = "rbxassetid://72361485477575",
+                Time = 5
+            })
+            wait(1)
+            OrionLib:Destroy()
+            wait(.3)
+            MakeScriptHub()
+        else
+           OrionLib:MakeNotification({
+                Name = "Đang Checking Key",
+                Content = "",
+                Image = "rbxassetid://72361485477575",
+                Time = 5
+            })
+            wait(2)
+            OrionLib:MakeNotification({
+                Name = "Xai Rồi Ku Xem Lại Key!",
+                Content = "",
+                Image = "rbxassetid://72361485477575",
+                Time = 5
+            })
+        end
+    end
+})
+
+Tab:AddButton({
+	Name = "Copy Kênh 🗿",
+	Callback = function()
+      		setclipboard("YTB: @thanhdzso1 TikTok: @vanthanhisme_ FB: @vanthanhisme")
+  	end    
+}) 
+    
+OrionLib:Init()
